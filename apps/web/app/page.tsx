@@ -14,6 +14,7 @@ const navButtons: { buttonName: string; pageTarget: string }[] = [
   { buttonName: 'Home', pageTarget: '/' },
   { buttonName: 'Courses', pageTarget: './courses' },
   { buttonName: 'Assignments', pageTarget: './assignments' },
+
   { buttonName: 'Calendar', pageTarget: './calendar' },
   { buttonName: 'Inbox', pageTarget: './calendar/inbox' },
 ];

@@ -17,7 +17,6 @@ export default function NavButton({
   buttonName,
 }: NavButtonProps) {
   const router = useRouter();
-  const [hover, setHover] = useState(false);
   const ref = useRef<HTMLButtonElement>(
     null,
   ) as React.RefObject<HTMLButtonElement>;
@@ -35,11 +34,8 @@ export default function NavButton({
     // Have to pass ref as attribute to the button element so React can populate ref with the actual DOM element
     <button
       ref={ref}
-      className={hover ? styles.navButtonHover : className}
-      // Change hover logic based on default provided
+      className={className}
       onClick={() => handleRoute(pageTarget)}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
       {buttonName ? buttonName : 'Nav Button'}
     </button>

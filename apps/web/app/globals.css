@@ -16,6 +16,20 @@ body {
   overflow-x: hidden;
 }
 
+header {
+  display: flex;
+  justify-content: flex-end; /* Align settings and inbox to the right */
+  padding: 1vw 1vw 1vw;
+  margin-bottom: auto;
+  background-color: var(--background);
+  max-height: 10vh;
+}
+
+header > * {
+  max-width: 5vw;
+  object-fit: contain;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

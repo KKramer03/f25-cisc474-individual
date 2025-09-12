@@ -117,10 +117,51 @@ button.secondary {
   min-width: 180px;
 }
 
-.navButtonHover {
-  background: #333;
-  color: #fff;
-  transform: scale(1.05);
+button.secondary:hover {
+  background: var(--gray-alpha-100);
+}
+.accordion {
+  appearance: none;
+  border-radius: 128px;
+  height: 5vw;
+  width: 50vw;
+  /* padding: 0 20px; */
+  margin: 2vw;
+  border: none;
+  font-family: var(--font-geist-sans);
+  border: 1px solid transparent;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  background: transparent;
+  border-color: var(--gray-alpha-200);
+  min-width: 180px;
+}
+
+.accordion:hover {
+  background: var(--gray-alpha-100);
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: var(--background);
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5vw;
 }
 
 .footer {
