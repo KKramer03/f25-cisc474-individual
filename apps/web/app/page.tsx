@@ -34,12 +34,13 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>CISC474 Project Starter</h1>
+        <h1>Current pages</h1>
         <ol>
-          <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
-          </li>
-          <li>Save and see your changes instantly.</li>
+          <li>Courses</li>
+          <li>Courses --&gt; Course</li>
+          <li>Coures --&gt; Course -&gt; Grades</li>
+          <li>Assignments</li>
+          <li>Inbox</li>
         </ol>
 
         <Button appName="web" className={styles.secondary}>
