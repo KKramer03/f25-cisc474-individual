@@ -4,7 +4,7 @@
 
 ## Database Tables
 
-- [Assinged Roles]
+- [Assigned Roles]
 - [Content]
 - [Course]
 - [Enrollment]
@@ -13,7 +13,8 @@
 - [Role]
 - [User]
 
-[Prisma Schema]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/packages/database/prisma/schema.prism- [Assinged Roles]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/apps/docs/database/AssignedRole_rows.csv
+[Prisma Schema]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/packages/database/prisma/schema.prisma
+[Assigned Roles]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/apps/docs/database/AssignedRole_rows.csv
 [Content]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/apps/docs/database/Content_rows.csv
 [Course]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/apps/docs/database/Course_rows.csv
 [Enrollment]: https://github.com/KKramer03/f25-cisc474-individual/blob/main/apps/docs/database/Enrollment_rows.csv
