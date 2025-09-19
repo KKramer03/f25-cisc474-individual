@@ -12,9 +12,98 @@ generator client {
   output   = "../generated/client"
 }
 
+generator custom_generator {
+  provider = "prisma-generator-fake-data"
+  output  = "../types/fake-data.ts"
+}
+
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
+  user_id    String   @id @default(cuid())
+  displayName  String   // Display name does not have to be unique
+  email      String   @unique // Maybe change to not unique in the future
+  roles     AssignedRole[] @relation("UserAssignedRoles") // Many-to-many relationship with Role through AssignedRole
+  enrolledCourses Enrollment[] @relation("UserEnrolledCourse") // many-to-many relationship composed with two one-to-many relationships with Course through Enrollment
+  instructedCourses Course[] @relation("UserInstructedCourses")// on4e-to-many relationship with Course
+  sentMessages Messages[] @relation("SentMessages") // one-to-many relationship with Messages
+  receivedMessages Messages[] @relation("ReceivedMessages") // one-to-many relationship with Messages
+
+}
+
+model AssignedRole {
+  assigned_role_id String @id @default(cuid())
+  user      User   @relation("UserAssignedRoles", fields: [userId], references: [user_id])
+  userId    String
+  role      Role   @relation("RoleAssignedType", fields: [roleId], references: [role_id])
+  roleId    String
+}
+
+model Role {
+  role_id   String   @id @default(cuid())
+  name      String   @unique
+  type      RoleType @unique
+  users     AssignedRole[] @relation("RoleAssignedType") // Many-to-many relationship with User through AssignedRole
+}
+
+model Enrollment {
+  enrollment_id String   @id @default(cuid())
+  user         User     @relation("UserEnrolledCourse", fields: [userId], references: [user_id])
+  userId       String
+  course       Course   @relation("CourseEnrollments", fields: [courseId], references: [course_id])
+  courseId     String
+  grades       Grade[]  @relation("StudentCourseGrades")// one-to-many relationship with Grade
+}
+
+model Course {
+  course_id   String   @id @default(cuid())
+  courseName  String
+  description String?
+  enrollments Enrollment[] @relation("CourseEnrollments") // one-to-many relationship with Enrollment
+  instructor  User     @relation("UserInstructedCourses", fields: [instructorId], references: [user_id])
+  instructorId String
+  contents    Content[] @relation("CourseContents") // one-to-many relationship with Content
+}
+
+model Content {
+  content_id  String   @id @default(cuid())
+  type        ContentType
+  title       String
+  body        String
+  course      Course   @relation("CourseContents", fields: [courseId], references: [course_id])
+  courseId    String
+}
+
+model Grade {
+  grade_id    String   @id @default(cuid())
+  assignment_name String
+  date_posted  DateTime // Postgres timestamp
+  enrollment  Enrollment @relation("StudentCourseGrades", fields: [enrollmentId], references: [enrollment_id])
+  enrollmentId String
+  score       Float
+}
+
+model Messages {
+  message_id String @id @default(cuid())
+  sender     User   @relation("SentMessages", fields: [sender_id], references: [user_id])
+  sender_id  String
+  receiver   User   @relation("ReceivedMessages", fields: [receiver_id], references: [user_id])
+  receiver_id String
+  content    String
+  timestamp  DateTime
+}
+
+enum RoleType {
+  ADMIN
+  INSTRUCTOR
+  TEACHING_ASSISTANT
+  STUDENT
+  UNASSIGNED
+}
+
+enum ContentType {
+  ASSIGNMENT // Generic assignment where students can submit their work
+  QUIZ      // An integrated quiz with multiple-choice questions
+  TEXT      // Plain text content for reading materials, lectures, etc.
+  // Announcements could be stored as TEXT while dms are stored in Messages
+  VIDEO     // Video content for lectures or tutorials
+  LINK      // External link to resources or references
 }
