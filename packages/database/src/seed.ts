@@ -11,7 +11,7 @@ import {
   fakeMessagesComplete,
   fakeAssignedRoleComplete,
   fakeContentComplete,
-} from '../types/fake-data';
+} from '../types/fake-data-custom'; // Adjusted import path so functions aren't overwritten when schema is regenerated
 
 function getRandomArrayElement<T>(arr: T[]): T | undefined {
   return arr[Math.floor(Math.random() * arr.length)];
