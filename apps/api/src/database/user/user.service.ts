@@ -1,5 +1,5 @@
-import { Get, Injectable, Query } from '@nestjs/common';
-import { type User } from '../../../../../packages/database/generated/client';
+import { Injectable } from '@nestjs/common';
+import { type User } from '@repo/database/generated/client';
 import { prisma } from '../../../../../packages/database/src/client';
 
 @Injectable()
@@ -11,5 +11,10 @@ export class UserService {
       },
     });
     return user;
+  }
+
+  async findAll(): Promise<User[]> {
+    const users: User[] = await prisma.user.findMany();
+    return users;
   }
 }

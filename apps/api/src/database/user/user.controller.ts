@@ -1,12 +1,18 @@
-import { Get, Controller, Body, Query } from '@nestjs/common';
+import { Get, Controller, Query } from '@nestjs/common';
+import { type User } from '@repo/database/generated/client';
 import { UserService } from './user.service';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async find(@Query('user_id') userID: string): Promise<any> {
+  async find(@Query('user_id') userID: string): Promise<User> {
     return await this.userService.find(userID);
+  }
+
+  @Get('all')
+  async findAll(): Promise<User[]> {
+    return await this.userService.findAll();
   }
 }
