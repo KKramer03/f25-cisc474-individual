@@ -70,6 +70,8 @@ model Content {
   body        String
   course      Course   @relation("CourseContents", fields: [courseId], references: [course_id])
   courseId    String
+  // grade       Grade?    @relation // one-to-one relationship with Grade (not all content will have a grade)
+  // Commented sections not yet added to schema, add later and regenerate fake data
 }
 
 model Grade {
@@ -78,6 +80,8 @@ model Grade {
   date_posted  DateTime // Postgres timestamp
   enrollment  Enrollment @relation("StudentCourseGrades", fields: [enrollmentId], references: [enrollment_id])
   enrollmentId String
+  // grade_content Content @relation(fields: [contentId], references: [content_id])
+  // contentId   String @unique
   score       Float
 }
 
