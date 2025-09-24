@@ -9,7 +9,8 @@
       "types": "./dist/client.d.ts",
       "require": "./dist/client.js",
       "import": "./dist/client.mjs"
-    }
+    },
+    "./generated/client": "./generated/client/index.js"
   },
   "scripts": {
     "db:migrate:deploy": "prisma migrate deploy",

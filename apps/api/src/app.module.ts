@@ -4,12 +4,11 @@ import { LinksModule } from './links/links.module';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { UserService } from './database/user/user.service';
-import { UserController } from './database/user/user.controller';
+import { UserModule } from './database/user/user.module';
 
 @Module({
-  imports: [LinksModule],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  imports: [LinksModule, UserModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
