@@ -10,6 +10,8 @@ import { ContentModule } from './database/content/content.module';
 import { RoleModule } from './database/role/role.module';
 import { AssignedRoleModule } from './database/assignedRole/assignedRole.module';
 import { EnrollmentModule } from './database/enrollment/enrollment.module';
+import { GradeModule } from './database/grade/grade.module';
+import { MessagesModule } from './database/message/message.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { EnrollmentModule } from './database/enrollment/enrollment.module';
     RoleModule,
     AssignedRoleModule,
     EnrollmentModule,
+    GradeModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
