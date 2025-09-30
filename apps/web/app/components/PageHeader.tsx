@@ -12,7 +12,11 @@ export default function PageHeader() {
 
   return (
     <h1 className={custom.pageHeader}>
-      {pageName.charAt(0).toUpperCase() + pageName.slice(1)}
+      {(pageName.charAt(0).toUpperCase() + pageName.slice(1)).replace(
+        /-/g,
+        ' ',
+      )}
+      {/* Convert dashes back to spaces   */}
     </h1>
   );
 }

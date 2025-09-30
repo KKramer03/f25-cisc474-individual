@@ -1,16 +1,27 @@
 import NavButton, { NavButtonProps } from '../../components/NavButton';
+import type { Course } from '@repo/database/generated/client';
 import styles from '../../page.module.css';
 import custom from '../../custom.module.css';
 
-export default function coursePage() {
-  const courseButtons: NavButtonProps[] = [
-    { buttonName: 'Economics', pageTarget: '/courses/economics' },
-    { buttonName: 'Mathematics', pageTarget: '/courses/mathematics' },
-    { buttonName: 'Physics', pageTarget: '/courses/physics' },
-    { buttonName: 'Chemistry', pageTarget: '/courses/chemistry' },
-    { buttonName: 'Biology', pageTarget: '/courses/biology' },
-    { buttonName: 'Computer Science', pageTarget: '/courses/computer-science' },
-  ];
+export default async function coursePage() {
+  // const courseButtons: NavButtonProps[] = [
+  //   { buttonName: 'Economics', pageTarget: '/courses/economics' },
+  //   { buttonName: 'Mathematics', pageTarget: '/courses/mathematics' },
+  //   { buttonName: 'Physics', pageTarget: '/courses/physics' },
+  //   { buttonName: 'Chemistry', pageTarget: '/courses/chemistry' },
+  //   { buttonName: 'Biology', pageTarget: '/courses/biology' },
+  //   { buttonName: 'Computer Science', pageTarget: '/courses/computer-science' },
+  // ];
+
+  const retrievedCourses = await fetch('http://localhost:3000/course/all');
+  const results: Course[] = await retrievedCourses.json();
+  // Nest.js backend running on port 3000, retrieve all courses from designated endpoint
+  // Loading.js should be displayed while waiting for response
+
+  const courseButtons = results.map((course) => ({
+    ...course,
+    pageTarget: `/courses/${course.courseName.toLowerCase().replace(/\s+/g, '-')}`,
+  })); // Convert course names to lowercase and replace spaces with dashes for URL
 
   return (
     <div className={styles.secondary}>
@@ -18,10 +29,10 @@ export default function coursePage() {
         {/* <div>Courses Page</div> */}
         <div>
           <div className={custom.coursesGrid}>
-            {courseButtons.map(({ buttonName, pageTarget }) => (
+            {courseButtons.map(({ courseName, pageTarget, course_id }) => (
               <NavButton
-                key={buttonName}
-                buttonName={buttonName}
+                key={course_id}
+                buttonName={courseName}
                 pageTarget={pageTarget}
                 className={custom.courseButton}
               />

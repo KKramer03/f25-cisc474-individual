@@ -1,9 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import useOnScreen from './useOnScreen';
-import styles from '../page.module.css';
 
 export interface NavButtonProps {
   buttonName?: string;

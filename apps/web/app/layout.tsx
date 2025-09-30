@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import ImageLink from './components/ImageLink';
 import PageHeader from './components/PageHeader';
+import custom from './custom.module.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -26,14 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header>
-          <PageHeader />
+        <header className={custom.titleHeader}>
+          <PageHeader />{' '}
           <ImageLink
             pageTarget="/courses"
             src="https://img.icons8.com/ios7/512/FFFFFF/settings.png"
             alt="Settings"
           />
-
           <ImageLink pageTarget="/courses" src="/inbox.png" alt="Inbox" />
         </header>
         {children}
