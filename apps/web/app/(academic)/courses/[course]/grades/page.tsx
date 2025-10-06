@@ -1,6 +1,6 @@
 import React from 'react';
 import custom from '../../../../custom.module.css';
-import type { Grade } from '@repo/database/generated/client';
+// import type { Grade } from '@repo/database/generated/client';
 
 export default async function GradesPage({
   searchParams,
@@ -45,7 +45,7 @@ export default async function GradesPage({
   const response = await fetch(
     `${backendSource}/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
   );
-  const gradeListings: Grade[] = await response.json();
+  const gradeListings: any[] = await response.json();
 
   const totalGrade = // Sum of all scores divided by sum of all max scores, rounded to 2 decimal places
     Math.round(
