@@ -37,11 +37,13 @@ export default async function GradesPage({
 
   // process.loadEnvFile('../../.env');
 
+  const backendSource = process.env.BACKEND_URL;
+
   const exampleUser = '12059e6c-4cef-4916-9f2a-0123de76c296';
   const courseID = (await searchParams).course_id as string;
 
   const response = await fetch(
-    `${process.env.BACKEND_URL}/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
+    `${backendSource}/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
   );
   const gradeListings: Grade[] = await response.json();
 

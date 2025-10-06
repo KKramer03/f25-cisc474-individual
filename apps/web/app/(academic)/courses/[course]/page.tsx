@@ -11,12 +11,14 @@ export default async function CoursePage({
 }) {
   // process.loadEnvFile('../../.env'); // Load environment variables from .env file
 
+  const backendSource = process.env.BACKEND_URL;
+
   const courseID = (await searchParams).course_id as string;
   const courseResponse = fetch(
-    `${process.env.BACKEND_URL}/course/?course_id=${courseID}`,
+    `${backendSource}/course/?course_id=${courseID}`,
   );
   const courseContentResponse = fetch(
-    `${process.env.BACKEND_URL}/content/by-course?course_id=${courseID}`,
+    `${backendSource}/content/by-course?course_id=${courseID}`,
   );
   const course = await (await courseResponse).json();
   const courseContent = await (await courseContentResponse).json();

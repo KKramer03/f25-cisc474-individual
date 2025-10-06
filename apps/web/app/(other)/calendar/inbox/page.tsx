@@ -34,8 +34,10 @@ export default async function inboxPage() {
 
   // process.loadEnvFile('../../.env');
 
+  const backendSource = process.env.BACKEND_URL;
+
   const messages = await (
-    await fetch(`${process.env.BACKEND_URL}/message/subset?amount=100`)
+    await fetch(`${backendSource}/message/subset?amount=100`)
   ).json();
   //
 

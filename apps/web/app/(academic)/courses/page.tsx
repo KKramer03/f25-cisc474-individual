@@ -16,8 +16,9 @@ export default async function coursePage() {
 
   // process.loadEnvFile('../../.env'); // Load environment variables from .env file
 
-  // const retrievedCourses = await fetch('http://localhost:3000/course/all');
-  const retrievedCourses = await fetch(`${process.env.BACKEND_URL}/course/all`);
+  const backendSource = process.env.BACKEND_URL;
+
+  const retrievedCourses = await fetch(`${backendSource}/course/all`);
   const results: Course[] = await retrievedCourses.json();
   // Nest.js backend running on port 3000, retrieve all courses from designated endpoint
   // Loading.js should be displayed while waiting for response
