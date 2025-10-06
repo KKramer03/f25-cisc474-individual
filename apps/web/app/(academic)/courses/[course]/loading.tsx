@@ -1,4 +1,4 @@
-import type { Course } from '@repo/database/generated/client';
+// import type { Course } from '@repo/database/generated/client';
 import styles from '../../../page.module.css';
 import custom from '../../../custom.module.css';
 import NavButton from '../../../components/NavButton';
