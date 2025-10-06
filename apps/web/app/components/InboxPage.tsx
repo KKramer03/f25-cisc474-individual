@@ -2,7 +2,7 @@
 
 import custom from '../custom.module.css';
 import { useState } from 'react';
-import type { Messages } from '@repo/database/generated/client';
+// import type { Messages } from '@repo/database/generated/client';
 import ConversationButton from './ConversationButton';
 
 export default function InboxPage({ messages }: { messages: Messages[] }) {
