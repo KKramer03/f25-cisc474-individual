@@ -43,6 +43,14 @@ export default function Home() {
           <li>Inbox</li>
         </ol>
 
+        <h1>Current Data Retrieval</h1>
+        <ol>
+          <li>Fetch courses</li>
+          <li>Fetch content by course</li>
+          <li>Fetch grades by course</li>
+          <li>Fetch messages</li>
+        </ol>
+
         <Button appName="web" className={styles.secondary}>
           Open alert
         </Button>
