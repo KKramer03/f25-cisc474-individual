@@ -14,7 +14,7 @@ export default async function coursePage() {
   //   { buttonName: 'Computer Science', pageTarget: '/courses/computer-science' },
   // ];
 
-  process.loadEnvFile('../../.env'); // Load environment variables from .env file
+  process.loadEnvFile(); // Load environment variables from .env file
 
   const backendSource = process.env.BACKEND_URL;
 
