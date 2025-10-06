@@ -16,7 +16,7 @@ export default async function coursePage() {
 
   // process.loadEnvFile(); // Load environment variables from .env file
 
-  const backendSource = process.env.BACKEND_URL;
+  const backendSource = 'https://f25-cisc474-individual-bgkq.onrender.com/';
 
   const retrievedCourses = await fetch(`${backendSource}/course/all`);
   const results: any[] = await retrievedCourses.json();

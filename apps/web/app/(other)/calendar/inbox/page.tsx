@@ -34,7 +34,7 @@ export default async function inboxPage() {
 
   // process.loadEnvFile();
 
-  const backendSource = process.env.BACKEND_URL;
+  const backendSource = 'https://f25-cisc474-individual-bgkq.onrender.com/';
 
   const messages = await (
     await fetch(`${backendSource}/message/subset?amount=100`)

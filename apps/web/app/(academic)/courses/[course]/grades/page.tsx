@@ -37,7 +37,7 @@ export default async function GradesPage({
 
   // process.loadEnvFile();
 
-  const backendSource = process.env.BACKEND_URL;
+  const backendSource = 'https://f25-cisc474-individual-bgkq.onrender.com/';
 
   const exampleUser = '12059e6c-4cef-4916-9f2a-0123de76c296';
   const courseID = (await searchParams).course_id as string;
