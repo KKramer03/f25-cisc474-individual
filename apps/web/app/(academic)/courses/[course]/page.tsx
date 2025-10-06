@@ -9,7 +9,7 @@ export default async function CoursePage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  process.loadEnvFile(); // Load environment variables from .env file
+  // process.loadEnvFile(); // Load environment variables from .env file
 
   const backendSource = process.env.BACKEND_URL;
 

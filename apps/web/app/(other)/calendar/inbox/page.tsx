@@ -32,7 +32,7 @@ export default async function inboxPage() {
   // messages[0] = TestMessage;
   // messages[1] = TestMessage2;
 
-  process.loadEnvFile();
+  // process.loadEnvFile();
 
   const backendSource = process.env.BACKEND_URL;
 

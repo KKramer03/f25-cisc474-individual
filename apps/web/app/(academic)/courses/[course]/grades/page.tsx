@@ -35,7 +35,7 @@ export default async function GradesPage({
   // const coursePattern = new RegExp('courses/(.*)/');
   // const course = coursePattern.exec(usePathname() || '')?.[1];
 
-  process.loadEnvFile();
+  // process.loadEnvFile();
 
   const backendSource = process.env.BACKEND_URL;
 
