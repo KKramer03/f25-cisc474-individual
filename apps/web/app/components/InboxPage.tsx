@@ -5,7 +5,7 @@ import { useState } from 'react';
 // import type { Messages } from '@repo/database/generated/client';
 import ConversationButton from './ConversationButton';
 
-export default function InboxPage({ messages }: { messages: Messages[] }) {
+export default function InboxPage({ messages }: { messages: any[] }) {
   const safeMessages = Array.isArray(messages) ? messages : [];
   const usersWithMessages = Array.from(
     new Set(safeMessages.map((msg: { sender_id: string }) => msg.sender_id)),
