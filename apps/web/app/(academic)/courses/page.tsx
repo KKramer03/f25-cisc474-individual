@@ -14,9 +14,9 @@ export default async function coursePage() {
   //   { buttonName: 'Computer Science', pageTarget: '/courses/computer-science' },
   // ];
 
-  // process.loadEnvFile('../../.env'); // Load environment variables from .env file
+  process.loadEnvFile('../../.env'); // Load environment variables from .env file
 
-  const backendSource = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendSource = process.env.BACKEND_URL;
 
   const retrievedCourses = await fetch(`${backendSource}/course/all`);
   const results: Course[] = await retrievedCourses.json();

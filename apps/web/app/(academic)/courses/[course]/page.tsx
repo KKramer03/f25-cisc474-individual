@@ -9,9 +9,9 @@ export default async function CoursePage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  // process.loadEnvFile('../../.env'); // Load environment variables from .env file
+  process.loadEnvFile('../../.env'); // Load environment variables from .env file
 
-  const backendSource = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendSource = process.env.BACKEND_URL;
 
   const courseID = (await searchParams).course_id as string;
   const courseResponse = fetch(
