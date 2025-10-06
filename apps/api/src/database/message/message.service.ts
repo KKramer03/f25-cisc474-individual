@@ -15,6 +15,13 @@ export class MessagesService {
     return message;
   }
 
+  async findSubset(amount: number): Promise<Messages[] | null> {
+    const messages: Messages[] = await this.prisma.messages.findMany({
+      take: amount,
+    });
+    return messages;
+  }
+
   async findAll(): Promise<Messages[] | null> {
     const messages: Messages[] = await this.prisma.messages.findMany();
     return messages;

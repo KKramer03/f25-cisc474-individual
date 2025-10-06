@@ -63,6 +63,7 @@ export function fakeContent() {
     type: faker.helpers.arrayElement([ContentType.ASSIGNMENT, ContentType.QUIZ, ContentType.TEXT, ContentType.VIDEO, ContentType.LINK] as const),
     title: faker.lorem.words(5),
     body: faker.lorem.words(5),
+    dueDate: undefined,
   };
 }
 export function fakeContentComplete() {
@@ -72,6 +73,7 @@ export function fakeContentComplete() {
     title: faker.lorem.words(5),
     body: faker.lorem.words(5),
     courseId: faker.string.uuid(),
+    dueDate: undefined,
   };
 }
 export function fakeGrade() {
@@ -79,6 +81,8 @@ export function fakeGrade() {
     assignment_name: faker.lorem.words(5),
     date_posted: faker.date.anytime(),
     score: faker.number.float(),
+    max_score: undefined,
+    percentage: undefined,
   };
 }
 export function fakeGradeComplete() {
@@ -88,6 +92,8 @@ export function fakeGradeComplete() {
     date_posted: faker.date.anytime(),
     enrollmentId: faker.string.uuid(),
     score: faker.number.float(),
+    max_score: undefined,
+    percentage: undefined,
   };
 }
 export function fakeMessages() {

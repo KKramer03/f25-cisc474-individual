@@ -79,6 +79,7 @@ export function fakeContent() {
     ] as const),
     title: faker.lorem.words({ min: 1, max: 3 }),
     body: faker.lorem.paragraph(),
+    dueDate: undefined,
   };
 }
 export function fakeContentComplete(course: string) {
@@ -94,6 +95,7 @@ export function fakeContentComplete(course: string) {
     title: faker.lorem.words({ min: 1, max: 3 }),
     body: faker.lorem.paragraph(),
     courseId: course,
+    dueDate: undefined,
   };
 }
 export function fakeGrade() {
@@ -101,6 +103,8 @@ export function fakeGrade() {
     assignment_name: faker.lorem.words({ min: 1, max: 3 }),
     date_posted: faker.date.past(),
     score: faker.number.float(),
+    max_score: faker.number.float(),
+    percentage: faker.number.float(),
   };
 }
 export function fakeGradeComplete(enrollmentId: string) {
@@ -110,6 +114,8 @@ export function fakeGradeComplete(enrollmentId: string) {
     date_posted: faker.date.past(),
     enrollmentId: enrollmentId,
     score: faker.number.float(),
+    max_score: faker.number.float(),
+    percentage: faker.number.float(),
   };
 }
 export function fakeMessages() {

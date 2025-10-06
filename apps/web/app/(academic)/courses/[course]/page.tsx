@@ -1,38 +1,85 @@
-'use client';
-
 import styles from '../../../page.module.css';
 import custom from '../../../custom.module.css';
-import Section from '../../../components/SectionButton';
-import { use, useState } from 'react';
+import type { Content } from '@repo/database/generated/client';
+import SectionWrapper from '../../../components/SectionWrapper';
 import NavButton from '../../../components/NavButton';
 
-export default function CoursePage({
-  params,
+export default async function CoursePage({
+  searchParams,
 }: {
-  params: Promise<{ course: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { course } = use(params);
-  // const sections: string[] = ['Section 1', 'Section 2', 'Section 3'];
+  const courseID = (await searchParams).course_id as string;
+  const courseResponse = fetch(
+    `http://localhost:3000/course/?course_id=${courseID}`,
+  );
+  const courseContentResponse = fetch(
+    `http://localhost:3000/content/by-course?course_id=${courseID}`,
+  );
+  const course = await (await courseResponse).json();
+  const courseContent = await (await courseContentResponse).json();
+  const courseName = course.courseName.replace(/\s+/g, '-').toLowerCase();
+  const deadlineContent = courseContent.filter(
+    (content: Content) =>
+      content.type === 'ASSIGNMENT' || content.type === 'QUIZ',
+  );
+
   const sections: { section: string; assignments: string[] }[] = [
     {
-      section: 'Section 1',
-      assignments: ['Assignment 1', 'Assignment 2', 'Assignment 3'],
+      section: 'Assignments',
+      assignments: deadlineContent
+        .filter((content: Content) => content.type === 'ASSIGNMENT')
+        .map((content: Content) => content.title),
     },
     {
-      section: 'Section 2',
-      assignments: ['Assignment 4', 'Assignment 5', 'Assignment 6'],
+      section: 'Quizzes',
+      assignments: deadlineContent
+        .filter((content: Content) => content.type === 'QUIZ')
+        .map((content: Content) => content.title),
     },
     {
-      section: 'Section 3',
-      assignments: ['Assignment 7', 'Assignment 8', 'Assignment 9'],
+      section: 'Videos, Links, and Readings',
+      assignments: courseContent
+        .filter(
+          (content: Content) =>
+            content.type !== 'QUIZ' && content.type !== 'ASSIGNMENT',
+        )
+        .map((content: Content) => content.title),
     },
   ];
 
-  const upcomingContent: { title: string; type: string; date: string }[] = [
-    { title: 'Lecture 1', type: 'Lecture', date: '2024-09-01' },
-    { title: 'Assignment 1', type: 'Assignment', date: '2024-09-05' },
-    { title: 'Quiz 1', type: 'Quiz', date: '2024-09-10' },
-  ];
+  const timeFormat = new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  });
+
+  const upcomingContent: {
+    contentID: string;
+    title: string;
+    type: string;
+    date: string;
+  }[] = deadlineContent
+    .filter(
+      (content: Content) => content.dueDate !== null,
+      // && new Date(content.dueDate) > new Date(),
+    ) // Get new array containing only content with due dates in the future
+    // Comment out the second condition to show all content with due dates
+    .sort((a: Content, b: Content) => {
+      if (a.dueDate && b.dueDate) {
+        //Sort the array by due date, with the earliest due date first
+        return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+      }
+      return 0; // If either due date is null, consider them equal
+    })
+    .map((content: Content) => ({
+      // Map the sorted array to the display format
+      contentID: content.content_id,
+      title: content.title,
+      type: content.type,
+      date: content.dueDate // Check if dueDate is not null before formatting with timeFormat
+        ? timeFormat.format(new Date(content.dueDate))
+        : '',
+    }));
 
   const messages: { sender: string; content: string; date: string }[] = [
     {
@@ -51,9 +98,6 @@ export default function CoursePage({
       date: '2024-09-03',
     },
   ];
-  const [openSection, setOpenSection] = useState<boolean[]>(
-    Array(sections.length).fill(false), // Create a state array to track which sections are open
-  );
 
   return (
     <div>
@@ -71,7 +115,7 @@ export default function CoursePage({
           >
             <NavButton
               buttonName="Grades"
-              pageTarget={`/courses/${course}/grades`}
+              pageTarget={`/courses/${courseName}/grades?course_id=${courseID}`}
               className={styles.secondary}
             />
           </div>
@@ -85,41 +129,16 @@ export default function CoursePage({
             }}
           >
             <h2>Upcoming Content</h2>
-            {upcomingContent.map((content, index) => (
-              <div key={index} className={styles.contentItem}>
+            {upcomingContent.map((content) => (
+              <div key={content.contentID} className={custom.contentWrapper}>
                 <p>
-                  {content.type}: {content.title} - {content.date}
+                  {content.type}: <strong>{content.title}</strong> -{' '}
+                  {content.date}
                 </p>
               </div>
             ))}
           </div>
-          <div
-            style={{
-              gridColumn: '2/5',
-              gridRow: 2,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            {sections.map((section, index) => (
-              <div key={index}>
-                <Section
-                  className={custom.sectionButton}
-                  sectionName={section.section}
-                  index={index}
-                  setState={setOpenSection}
-                  state={openSection}
-                />
-                {openSection[index] && (
-                  <div>
-                    {section.assignments.map((assignment, idx) => (
-                      <div key={idx}>{assignment}</div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <SectionWrapper sections={sections} />
           <div
             style={{
               gridColumn: '4/6',

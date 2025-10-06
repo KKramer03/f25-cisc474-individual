@@ -11,6 +11,13 @@ export class MessagesController {
     return await this.messageService.find(messageID);
   }
 
+  @Get('subset')
+  async findSubset(
+    @Query('amount') amount: string,
+  ): Promise<Messages[] | null> {
+    return await this.messageService.findSubset(Number(amount));
+  }
+
   @Get('all')
   async findAll(): Promise<Messages[] | null> {
     return await this.messageService.findAll();

@@ -20,7 +20,7 @@ export default async function coursePage() {
 
   const courseButtons = results.map((course) => ({
     ...course,
-    pageTarget: `/courses/${course.courseName.toLowerCase().replace(/\s+/g, '-')}`,
+    pageTarget: `/courses/${course.courseName.toLowerCase().replace(/\s+/g, '-')}?course_id=${course.course_id}`,
   })); // Convert course names to lowercase and replace spaces with dashes for URL
 
   return (

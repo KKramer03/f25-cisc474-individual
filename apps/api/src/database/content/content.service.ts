@@ -15,6 +15,15 @@ export class ContentService {
     return content;
   }
 
+  async findByCourse(courseID: string): Promise<Content[] | null> {
+    const contents: Content[] = await this.prisma.content.findMany({
+      where: {
+        courseId: courseID,
+      },
+    });
+    return contents;
+  }
+
   async findAll(): Promise<Content[] | null> {
     const contents: Content[] = await this.prisma.content.findMany();
     return contents;

@@ -1,27 +1,47 @@
 import custom from '../../../custom.module.css';
+import InboxPage from '../../../components/InboxPage';
 
-export default function inboxPage() {
-  return (
-    <div className={custom.customDefaults}>
-      <div className={custom.gridWrapper}>
-        <div className={custom.MessageList}>
-          <div className={custom.conversations}>
-            <h2>Messages</h2>{' '}
-            {/* make class for message column and child div}
-        {/* Map through messages and display them */}
-          </div>
-          <div className={custom.announcements}>
-            <h2>Announcements</h2>
-            {/* Map through announcements and display them */}
-          </div>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <h2>Conversation with User</h2> {/* displays active conversation */}
-        </div>
-        <div className={custom.toolBar}>
-          <h2></h2> {/*final column for actions like delete, archive, etc*/}
-        </div>
-      </div>
-    </div>
-  );
+export default async function inboxPage() {
+  // const messages = [
+  //   'example 1',
+  //   'example 2',
+  //   'example 3',
+  //   'example 4',
+  //   'example 5',
+  //   'example 6',
+  //   'example 7',
+  //   'example 8',
+  //   'example 9',
+  // ];
+
+  // const TestMessage = await (
+  //   await fetch(
+  //     'http://localhost:3000/message?message_id=00173bdd-a75e-4378-a573-b3f92bab851d',
+  //   )
+  // ) //use one sender, lag when querying all messages
+  //   .json();
+
+  // const TestMessage2 = await (
+  //   await fetch(
+  //     'http://localhost:3000/message?message_id=02249409-7cca-4f1c-a380-6d5853761111',
+  //   )
+  // ) //use one sender, lag when querying all messages
+  //   .json();
+
+  // let messages = [];
+  // messages[0] = TestMessage;
+  // messages[1] = TestMessage2;
+
+  const messages = await (
+    await fetch('http://localhost:3000/message/subset?amount=100')
+  ).json();
+  //
+
+  console.log('Fetched messages:', messages);
+
+  // const usersWithMessages = Array.from(
+  //   new Set(messages.map((msg: { sender_id: string }) => msg.sender_id)),
+  // ); // Maps through messages and extracts unique sender_id's (set removes duplicates)
+
+  return <InboxPage messages={messages} />;
 }
