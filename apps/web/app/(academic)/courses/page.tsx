@@ -16,9 +16,11 @@ export default async function coursePage() {
 
   // process.loadEnvFile(); // Load environment variables from .env file
 
-  const backendSource = 'https://f25-cisc474-individual-bgkq.onrender.com/';
+  const backendSource = 'process.env.BACKEND_URL';
 
-  const retrievedCourses = await fetch(`${backendSource}/course/all`);
+  const retrievedCourses = await fetch(
+    'https://f25-cisc474-individual-bgkq.onrender.com/course/all',
+  );
   const results: any[] = await retrievedCourses.json();
   // Nest.js backend running on port 3000, retrieve all courses from designated endpoint
   // Loading.js should be displayed while waiting for response

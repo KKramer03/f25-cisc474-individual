@@ -11,14 +11,14 @@ export default async function CoursePage({
 }) {
   // process.loadEnvFile(); // Load environment variables from .env file
 
-  const backendSource = 'https://f25-cisc474-individual-bgkq.onrender.com/';
+  const backendSource = 'process.env.BACKEND_URL';
 
   const courseID = (await searchParams).course_id as string;
   const courseResponse = fetch(
-    `${backendSource}/course/?course_id=${courseID}`,
+    `https://f25-cisc474-individual-bgkq.onrender.com/course/?course_id=${courseID}`,
   );
   const courseContentResponse = fetch(
-    `${backendSource}/content/by-course?course_id=${courseID}`,
+    `https://f25-cisc474-individual-bgkq.onrender.com/content/by-course?course_id=${courseID}`,
   );
   const course = await (await courseResponse).json();
   const courseContent = await (await courseContentResponse).json();
