@@ -1,5 +1,5 @@
 import NavButton, { NavButtonProps } from '../../components/NavButton';
-import type { Course } from '@repo/database/generated/client';
+// import type { Course } from '@repo/database/generated/client';
 import styles from '../../page.module.css';
 import custom from '../../custom.module.css';
 import { env } from 'process';
@@ -19,7 +19,7 @@ export default async function coursePage() {
   const backendSource = process.env.BACKEND_URL;
 
   const retrievedCourses = await fetch(`${backendSource}/course/all`);
-  const results: Course[] = await retrievedCourses.json();
+  const results: any[] = await retrievedCourses.json();
   // Nest.js backend running on port 3000, retrieve all courses from designated endpoint
   // Loading.js should be displayed while waiting for response
 

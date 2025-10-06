@@ -1,6 +1,6 @@
 import styles from '../../../page.module.css';
 import custom from '../../../custom.module.css';
-import type { Content } from '@repo/database/generated/client';
+// import type { Content } from '@repo/database/generated/client';
 import SectionWrapper from '../../../components/SectionWrapper';
 import NavButton from '../../../components/NavButton';
 
@@ -24,31 +24,30 @@ export default async function CoursePage({
   const courseContent = await (await courseContentResponse).json();
   const courseName = course.courseName.replace(/\s+/g, '-').toLowerCase();
   const deadlineContent = courseContent.filter(
-    (content: Content) =>
-      content.type === 'ASSIGNMENT' || content.type === 'QUIZ',
+    (content: any) => content.type === 'ASSIGNMENT' || content.type === 'QUIZ',
   );
 
   const sections: { section: string; assignments: string[] }[] = [
     {
       section: 'Assignments',
       assignments: deadlineContent
-        .filter((content: Content) => content.type === 'ASSIGNMENT')
-        .map((content: Content) => content.title),
+        .filter((content: any) => content.type === 'ASSIGNMENT')
+        .map((content: any) => content.title),
     },
     {
       section: 'Quizzes',
       assignments: deadlineContent
-        .filter((content: Content) => content.type === 'QUIZ')
-        .map((content: Content) => content.title),
+        .filter((content: any) => content.type === 'QUIZ')
+        .map((content: any) => content.title),
     },
     {
       section: 'Videos, Links, and Readings',
       assignments: courseContent
         .filter(
-          (content: Content) =>
+          (content: any) =>
             content.type !== 'QUIZ' && content.type !== 'ASSIGNMENT',
         )
-        .map((content: Content) => content.title),
+        .map((content: any) => content.title),
     },
   ];
 
@@ -64,18 +63,18 @@ export default async function CoursePage({
     date: string;
   }[] = deadlineContent
     .filter(
-      (content: Content) => content.dueDate !== null,
+      (content: any) => content.dueDate !== null,
       // && new Date(content.dueDate) > new Date(),
     ) // Get new array containing only content with due dates in the future
     // Comment out the second condition to show all content with due dates
-    .sort((a: Content, b: Content) => {
+    .sort((a: any, b: any) => {
       if (a.dueDate && b.dueDate) {
         //Sort the array by due date, with the earliest due date first
         return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
       }
       return 0; // If either due date is null, consider them equal
     })
-    .map((content: Content) => ({
+    .map((content: any) => ({
       // Map the sorted array to the display format
       contentID: content.content_id,
       title: content.title,
