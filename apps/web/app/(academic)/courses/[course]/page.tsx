@@ -9,7 +9,7 @@ export default async function CoursePage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  process.loadEnvFile('../../.env'); // Load environment variables from .env file
+  // process.loadEnvFile('../../.env'); // Load environment variables from .env file
 
   const courseID = (await searchParams).course_id as string;
   const courseResponse = fetch(
