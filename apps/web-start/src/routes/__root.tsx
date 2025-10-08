@@ -10,7 +10,11 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import TanStackQueryDevtools from '../integrations/devtools';
 import appCss from '../styles.css?url';
+import PageHeader from '../components/PageHeader';
+import ImageLink from '../components/ImageLink';
 import type { QueryClient } from '@tanstack/react-query';
+import custom from '../custom.module.css';
+import '../globals.css';
 
 export interface MyRouterContext {
   queryClient: QueryClient;
@@ -48,6 +52,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <header className={custom.titleHeader}>
+          <PageHeader />{' '}
+          <ImageLink
+            pageTarget="/courses"
+            src="https://img.icons8.com/ios7/512/FFFFFF/settings.png"
+            alt="Settings"
+          />
+          <ImageLink pageTarget="/courses" src="/inbox.png" alt="Inbox" />
+        </header>
         {children}
         <TanStackDevtools
           config={{

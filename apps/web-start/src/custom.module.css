@@ -1,0 +1,201 @@
+.customDefaults {
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+.gridWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: auto;
+  justify-items: center;
+  gap: 5vw;
+  height: 100vh;
+}
+
+.courseGridWrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 4fr;
+  margin-top: auto;
+  height: 100vh;
+}
+
+.gradeGrid {
+  grid-column: 2/5;
+  grid-row: 2;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.accordion {
+  height: 5vw;
+  width: 30vw;
+  margin: 2vw;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  border-radius: 128px;
+  background-color: #2b2a33; /* Default background color */
+}
+
+.accordion:hover {
+  background-color: #3c3b47; /* Background color on hover */
+}
+
+.coursesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.courseDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.courseButton {
+  background-color: #2b2a33;
+  font-family: 'Courier New', monospace;
+  border-radius: 128px;
+  height: 20vw;
+  width: 20vw;
+  margin: 2vw;
+}
+
+.courseButton:hover {
+  background-color: #3c3b47; /* Background color on hover */
+}
+
+.section-wrapper {
+  grid-column: 2/5;
+  grid-row: 2;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+.sectionButton {
+  height: 5vw;
+  width: 30vw;
+  margin: 2vw;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  border-radius: 128px;
+  background-color: #2b2a33; /* Default background color */
+}
+
+.sectionButton:hover {
+  background-color: #3c3b47; /* Background color on hover */
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 5%;
+}
+
+.pageHeader {
+  font-family: 'Courier New', monospace;
+  position: absolute;
+  max-width: 50vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.MessageList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow: scroll;
+  text-align: left;
+  align-items: center;
+  height: 80vh;
+  width: 80%;
+  margin: 5%;
+}
+
+.conversationButton:hover {
+  cursor: pointer;
+  background-color: #3c3b47; /* Background color on hover */
+}
+
+.conversations {
+  flex: 1;
+  background-color: #2b2a33;
+  border-radius: 5%;
+  margin-top: 5%;
+  max-height: fit-content;
+  overflow: scroll;
+  width: 100%;
+}
+
+.conversations > * {
+  margin-left: 10%;
+  margin-top: 5%;
+}
+
+.announcements {
+  flex: 1;
+  background-color: #2b2a33;
+  border-radius: 5%;
+  margin-top: 5%;
+  width: 100%;
+}
+
+.announcements > * {
+  margin-left: 10%;
+  margin-top: 5%;
+}
+
+.message {
+  background-color: #2b2a33;
+  border-radius: 5%;
+  width: 75%;
+  min-height: 15%;
+  padding: 5%;
+  height: 100%;
+}
+
+.message:nth-child(even) {
+  float: right;
+  clear: right;
+}
+.alignEnd {
+  align-self: flex-end;
+}
+
+.alignStart {
+  align-self: flex-start;
+}
+
+.messageColumn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin-top: 5%;
+  gap: 5vh; /* Adjust as needed */
+  height: 85vh;
+  width: 100%;
+  overflow: scroll;
+}
+
+.toolBar {
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10%;
+  width: 25%;
+  height: 75%;
+  background-color: #2b2a33;
+  margin-top: auto;
+  margin-bottom: auto;
+}
