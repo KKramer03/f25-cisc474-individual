@@ -7,6 +7,7 @@ import custom from '../../../../custom.module.css';
 import SectionWrapper from '../../../../components/SectionWrapper';
 import NavButton from '../../../../components/NavButton';
 import CourseLoading from '../../../../components/CourseLoading';
+import { backendFetcher } from '../../../../integrations/fetcher';
 import type { Content, Course } from '@repo/database/generated/client';
 
 export const Route = createFileRoute(
@@ -32,41 +33,23 @@ function CoursePage() {
 }
 
 function CourseContent() {
-  // process.loadEnvFile(); // Load environment variables from .env file
-
-  // const backendSource = process.env.BACKEND_URL;
-
   const { course_id }: { course_id: string } = Route.useSearch();
 
   const courseResponse = useSuspenseQuery({
     queryKey: ['course', course_id],
-    queryFn: async (): Promise<Array<Course>> => {
-      const response = await fetch(
-        `http://localhost:3000/course/?course_id=${course_id}`,
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return await response.json();
-    },
+    queryFn: backendFetcher<Array<Course>>(
+      `/course/by-id?course_id=${course_id}`,
+    ),
   });
 
   const courseContentResponse = useSuspenseQuery({
     queryKey: ['courseContent', course_id],
-    queryFn: async (): Promise<Array<Content>> => {
-      const response = await fetch(
-        `http://localhost:3000/content/by-course?course_id=${course_id}`,
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return await response.json();
-    },
+    queryFn: backendFetcher<Array<Content>>(
+      `/content/by-course?course_id=${course_id}`,
+    ),
   });
 
-  const course = courseResponse.data[0];
   const courseContent = courseContentResponse.data;
-  const courseName = course?.courseName.replace(/\s+/g, '-').toLowerCase();
   const deadlineContent = courseContent.filter(
     (content: any) => content.type === 'ASSIGNMENT' || content.type === 'QUIZ',
   );

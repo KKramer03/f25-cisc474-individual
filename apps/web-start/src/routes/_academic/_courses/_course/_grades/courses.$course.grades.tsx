@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import custom from '../../../../../custom.module.css';
 import GradeLoading from '../../../../../components/GradeLoading';
+import { backendFetcher } from '../../../../../integrations/fetcher';
 import type { Grade } from '@repo/database/generated/client';
 
 export const Route = createFileRoute(
@@ -28,33 +29,18 @@ function GradesPage() {
 }
 
 function GradesContent() {
-  // process.loadEnvFile();
-
-  // const backendSource = process.env.BACKEND_URL;
-
   const exampleUser = '12059e6c-4cef-4916-9f2a-0123de76c296';
 
   const { course_id } = Route.useSearch();
   const courseID = course_id;
 
-  // const courseID = (await searchParams).course_id as string;
-
   const response = useSuspenseQuery({
     queryKey: ['grades', exampleUser, courseID],
-    queryFn: async (): Promise<Array<Grade>> => {
-      const res = await fetch(
-        `http://localhost:3000/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
-      );
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return await res.json();
-    },
+    queryFn: backendFetcher<Array<Grade>>(
+      `/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
+    ),
   });
 
-  // const response = await fetch(
-  //   `${backendSource}/grade/user-course?user_id=${exampleUser}&course_id=${courseID}`,
-  // );
   const gradeListings: Array<any> = response.data;
 
   const totalGrade = // Sum of all scores divided by sum of all max scores, rounded to 2 decimal places

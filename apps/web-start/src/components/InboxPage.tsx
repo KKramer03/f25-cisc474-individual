@@ -56,7 +56,7 @@ export default function InboxPage({ messages }: { messages: Array<any> }) {
           </div>
         </div>
         <div className={custom.toolBar}>
-          <h2></h2> {/*final column for actions like delete, archive, etc*/}
+          <h2></h2> {/* final column for actions like delete, archive, etc*/}
         </div>
       </div>
     </div>

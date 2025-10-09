@@ -6,6 +6,7 @@ import NavButton from '../../../components/NavButton';
 import styles from '../../../page.module.css';
 import custom from '../../../custom.module.css';
 import CoursesLoading from '../../../components/CoursesLoading';
+import { backendFetcher } from '../../../integrations/fetcher';
 import type { Course } from '@repo/database/generated/client';
 
 export const Route = createFileRoute('/_academic/_courses/courses')({
@@ -21,19 +22,9 @@ function coursePage() {
 }
 
 function CoursesList() {
-  // process.loadEnvFile(); // Load environment variables from .env file
-
-  const backendSource = process.env.BACKEND_URL;
-
   const retrievedCourses = useSuspenseQuery({
     queryKey: ['courses'],
-    queryFn: async (): Promise<Array<Course>> => {
-      const response = await fetch(`http://localhost:3000/course/all`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return await response.json();
-    },
+    queryFn: backendFetcher<Array<Course>>(`/course/all`),
   });
 
   const results: Array<Course> = retrievedCourses.data;
@@ -48,7 +39,6 @@ function CoursesList() {
   return (
     <div className={styles.secondary}>
       <div className={custom.customDefaults}>
-        {/* <div>Courses Page</div> */}
         <div>
           <div className={custom.coursesGrid}>
             {courseButtons.map(({ courseName, pageTarget, course_id }) => (

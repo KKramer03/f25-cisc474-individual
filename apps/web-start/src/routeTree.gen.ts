@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OtherCalendarCalendarRouteImport } from './routes/_other/_calendar/calendar'
 import { Route as AcademicCoursesCoursesRouteImport } from './routes/_academic/_courses/courses'
 import { Route as AcademicAssignmentsAssignmentsRouteImport } from './routes/_academic/_assignments/assignments'
 import { Route as OtherCalendarInboxIndexRouteImport } from './routes/_other/_calendar/inbox/index'
@@ -19,6 +20,11 @@ import { Route as AcademicCoursesCourseGradesCoursesCourseGradesRouteImport } fr
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OtherCalendarCalendarRoute = OtherCalendarCalendarRouteImport.update({
+  id: '/_other/_calendar/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcademicCoursesCoursesRoute = AcademicCoursesCoursesRouteImport.update({
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assignments': typeof AcademicAssignmentsAssignmentsRoute
   '/courses': typeof AcademicCoursesCoursesRoute
+  '/calendar': typeof OtherCalendarCalendarRoute
   '/inbox': typeof OtherCalendarInboxIndexRoute
   '/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
   '/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assignments': typeof AcademicAssignmentsAssignmentsRoute
   '/courses': typeof AcademicCoursesCoursesRoute
+  '/calendar': typeof OtherCalendarCalendarRoute
   '/inbox': typeof OtherCalendarInboxIndexRoute
   '/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
   '/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_academic/_assignments/assignments': typeof AcademicAssignmentsAssignmentsRoute
   '/_academic/_courses/courses': typeof AcademicCoursesCoursesRoute
+  '/_other/_calendar/calendar': typeof OtherCalendarCalendarRoute
   '/_other/_calendar/inbox/': typeof OtherCalendarInboxIndexRoute
   '/_academic/_courses/_course/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
   '/_academic/_courses/_course/_grades/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/'
     | '/assignments'
     | '/courses'
+    | '/calendar'
     | '/inbox'
     | '/courses/$course'
     | '/courses/$course/grades'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/'
     | '/assignments'
     | '/courses'
+    | '/calendar'
     | '/inbox'
     | '/courses/$course'
     | '/courses/$course/grades'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_academic/_assignments/assignments'
     | '/_academic/_courses/courses'
+    | '/_other/_calendar/calendar'
     | '/_other/_calendar/inbox/'
     | '/_academic/_courses/_course/courses/$course'
     | '/_academic/_courses/_course/_grades/courses/$course/grades'
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcademicAssignmentsAssignmentsRoute: typeof AcademicAssignmentsAssignmentsRoute
   AcademicCoursesCoursesRoute: typeof AcademicCoursesCoursesRoute
+  OtherCalendarCalendarRoute: typeof OtherCalendarCalendarRoute
   OtherCalendarInboxIndexRoute: typeof OtherCalendarInboxIndexRoute
   AcademicCoursesCourseCoursesCourseRoute: typeof AcademicCoursesCourseCoursesCourseRoute
   AcademicCoursesCourseGradesCoursesCourseGradesRoute: typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
@@ -118,6 +131,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_other/_calendar/calendar': {
+      id: '/_other/_calendar/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof OtherCalendarCalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_academic/_courses/courses': {
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcademicAssignmentsAssignmentsRoute: AcademicAssignmentsAssignmentsRoute,
   AcademicCoursesCoursesRoute: AcademicCoursesCoursesRoute,
+  OtherCalendarCalendarRoute: OtherCalendarCalendarRoute,
   OtherCalendarInboxIndexRoute: OtherCalendarInboxIndexRoute,
   AcademicCoursesCourseCoursesCourseRoute:
     AcademicCoursesCourseCoursesCourseRoute,
