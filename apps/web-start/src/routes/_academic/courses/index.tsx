@@ -9,7 +9,7 @@ import CoursesLoading from '../../../components/CoursesLoading';
 import { backendFetcher } from '../../../integrations/fetcher';
 import type { Course } from '@repo/database/generated/client';
 
-export const Route = createFileRoute('/_academic/_courses/courses')({
+export const Route = createFileRoute('/_academic/courses/')({
   component: coursePage,
 });
 
@@ -57,5 +57,5 @@ function CoursesList() {
         </div>
       </div>
     </div>
-  );
+  )
 }

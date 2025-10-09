@@ -9,7 +9,7 @@ import { useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import { create } from 'domain';
 
-export const Route = createFileRoute('/_academic/_assignments/assignments')({
+export const Route = createFileRoute('/_academic/assignments/')({
   component: AssignmentsPage,
 });
 
@@ -70,11 +70,11 @@ function AssignmentsPage() {
                     {section.title}
                   </button>
                   {openSection[index] && ( // Conditionally render the panel if the section is open
-                    <Panel>
+                    (<Panel>
                       {section.assignments.map((assignment, i) => (
                         <p key={i}>{assignment}</p>
                       ))}
-                    </Panel>
+                    </Panel>)
                   )}
                 </div>
               ),
@@ -83,5 +83,5 @@ function AssignmentsPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

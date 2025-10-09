@@ -10,118 +10,118 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcademicCoursesIndexRouteImport } from './routes/_academic/courses/index'
+import { Route as AcademicAssignmentsIndexRouteImport } from './routes/_academic/assignments/index'
 import { Route as OtherCalendarCalendarRouteImport } from './routes/_other/_calendar/calendar'
-import { Route as AcademicCoursesCoursesRouteImport } from './routes/_academic/_courses/courses'
-import { Route as AcademicAssignmentsAssignmentsRouteImport } from './routes/_academic/_assignments/assignments'
 import { Route as OtherCalendarInboxIndexRouteImport } from './routes/_other/_calendar/inbox/index'
-import { Route as AcademicCoursesCourseCoursesCourseRouteImport } from './routes/_academic/_courses/_course/courses.$course'
-import { Route as AcademicCoursesCourseGradesCoursesCourseGradesRouteImport } from './routes/_academic/_courses/_course/_grades/courses.$course.grades'
+import { Route as AcademicCoursesCourseIndexRouteImport } from './routes/_academic/courses/$course/index'
+import { Route as AcademicCoursesCourseGradesIndexRouteImport } from './routes/_academic/courses/$course/grades/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicCoursesIndexRoute = AcademicCoursesIndexRouteImport.update({
+  id: '/_academic/courses/',
+  path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicAssignmentsIndexRoute =
+  AcademicAssignmentsIndexRouteImport.update({
+    id: '/_academic/assignments/',
+    path: '/assignments/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const OtherCalendarCalendarRoute = OtherCalendarCalendarRouteImport.update({
   id: '/_other/_calendar/calendar',
   path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AcademicCoursesCoursesRoute = AcademicCoursesCoursesRouteImport.update({
-  id: '/_academic/_courses/courses',
-  path: '/courses',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AcademicAssignmentsAssignmentsRoute =
-  AcademicAssignmentsAssignmentsRouteImport.update({
-    id: '/_academic/_assignments/assignments',
-    path: '/assignments',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const OtherCalendarInboxIndexRoute = OtherCalendarInboxIndexRouteImport.update({
   id: '/_other/_calendar/inbox/',
   path: '/inbox/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AcademicCoursesCourseCoursesCourseRoute =
-  AcademicCoursesCourseCoursesCourseRouteImport.update({
-    id: '/_academic/_courses/_course/courses/$course',
-    path: '/courses/$course',
+const AcademicCoursesCourseIndexRoute =
+  AcademicCoursesCourseIndexRouteImport.update({
+    id: '/_academic/courses/$course/',
+    path: '/courses/$course/',
     getParentRoute: () => rootRouteImport,
   } as any)
-const AcademicCoursesCourseGradesCoursesCourseGradesRoute =
-  AcademicCoursesCourseGradesCoursesCourseGradesRouteImport.update({
-    id: '/_academic/_courses/_course/_grades/courses/$course/grades',
-    path: '/courses/$course/grades',
+const AcademicCoursesCourseGradesIndexRoute =
+  AcademicCoursesCourseGradesIndexRouteImport.update({
+    id: '/_academic/courses/$course/grades/',
+    path: '/courses/$course/grades/',
     getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/assignments': typeof AcademicAssignmentsAssignmentsRoute
-  '/courses': typeof AcademicCoursesCoursesRoute
   '/calendar': typeof OtherCalendarCalendarRoute
+  '/assignments': typeof AcademicAssignmentsIndexRoute
+  '/courses': typeof AcademicCoursesIndexRoute
+  '/courses/$course': typeof AcademicCoursesCourseIndexRoute
   '/inbox': typeof OtherCalendarInboxIndexRoute
-  '/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
-  '/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
+  '/courses/$course/grades': typeof AcademicCoursesCourseGradesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/assignments': typeof AcademicAssignmentsAssignmentsRoute
-  '/courses': typeof AcademicCoursesCoursesRoute
   '/calendar': typeof OtherCalendarCalendarRoute
+  '/assignments': typeof AcademicAssignmentsIndexRoute
+  '/courses': typeof AcademicCoursesIndexRoute
+  '/courses/$course': typeof AcademicCoursesCourseIndexRoute
   '/inbox': typeof OtherCalendarInboxIndexRoute
-  '/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
-  '/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
+  '/courses/$course/grades': typeof AcademicCoursesCourseGradesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_academic/_assignments/assignments': typeof AcademicAssignmentsAssignmentsRoute
-  '/_academic/_courses/courses': typeof AcademicCoursesCoursesRoute
   '/_other/_calendar/calendar': typeof OtherCalendarCalendarRoute
+  '/_academic/assignments/': typeof AcademicAssignmentsIndexRoute
+  '/_academic/courses/': typeof AcademicCoursesIndexRoute
+  '/_academic/courses/$course/': typeof AcademicCoursesCourseIndexRoute
   '/_other/_calendar/inbox/': typeof OtherCalendarInboxIndexRoute
-  '/_academic/_courses/_course/courses/$course': typeof AcademicCoursesCourseCoursesCourseRoute
-  '/_academic/_courses/_course/_grades/courses/$course/grades': typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
+  '/_academic/courses/$course/grades/': typeof AcademicCoursesCourseGradesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/calendar'
     | '/assignments'
     | '/courses'
-    | '/calendar'
-    | '/inbox'
     | '/courses/$course'
+    | '/inbox'
     | '/courses/$course/grades'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/calendar'
     | '/assignments'
     | '/courses'
-    | '/calendar'
-    | '/inbox'
     | '/courses/$course'
+    | '/inbox'
     | '/courses/$course/grades'
   id:
     | '__root__'
     | '/'
-    | '/_academic/_assignments/assignments'
-    | '/_academic/_courses/courses'
     | '/_other/_calendar/calendar'
+    | '/_academic/assignments/'
+    | '/_academic/courses/'
+    | '/_academic/courses/$course/'
     | '/_other/_calendar/inbox/'
-    | '/_academic/_courses/_course/courses/$course'
-    | '/_academic/_courses/_course/_grades/courses/$course/grades'
+    | '/_academic/courses/$course/grades/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AcademicAssignmentsAssignmentsRoute: typeof AcademicAssignmentsAssignmentsRoute
-  AcademicCoursesCoursesRoute: typeof AcademicCoursesCoursesRoute
   OtherCalendarCalendarRoute: typeof OtherCalendarCalendarRoute
+  AcademicAssignmentsIndexRoute: typeof AcademicAssignmentsIndexRoute
+  AcademicCoursesIndexRoute: typeof AcademicCoursesIndexRoute
+  AcademicCoursesCourseIndexRoute: typeof AcademicCoursesCourseIndexRoute
   OtherCalendarInboxIndexRoute: typeof OtherCalendarInboxIndexRoute
-  AcademicCoursesCourseCoursesCourseRoute: typeof AcademicCoursesCourseCoursesCourseRoute
-  AcademicCoursesCourseGradesCoursesCourseGradesRoute: typeof AcademicCoursesCourseGradesCoursesCourseGradesRoute
+  AcademicCoursesCourseGradesIndexRoute: typeof AcademicCoursesCourseGradesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,25 +133,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_academic/courses/': {
+      id: '/_academic/courses/'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof AcademicCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_academic/assignments/': {
+      id: '/_academic/assignments/'
+      path: '/assignments'
+      fullPath: '/assignments'
+      preLoaderRoute: typeof AcademicAssignmentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_other/_calendar/calendar': {
       id: '/_other/_calendar/calendar'
       path: '/calendar'
       fullPath: '/calendar'
       preLoaderRoute: typeof OtherCalendarCalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_academic/_courses/courses': {
-      id: '/_academic/_courses/courses'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof AcademicCoursesCoursesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_academic/_assignments/assignments': {
-      id: '/_academic/_assignments/assignments'
-      path: '/assignments'
-      fullPath: '/assignments'
-      preLoaderRoute: typeof AcademicAssignmentsAssignmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_other/_calendar/inbox/': {
@@ -161,18 +161,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OtherCalendarInboxIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_academic/_courses/_course/courses/$course': {
-      id: '/_academic/_courses/_course/courses/$course'
+    '/_academic/courses/$course/': {
+      id: '/_academic/courses/$course/'
       path: '/courses/$course'
       fullPath: '/courses/$course'
-      preLoaderRoute: typeof AcademicCoursesCourseCoursesCourseRouteImport
+      preLoaderRoute: typeof AcademicCoursesCourseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_academic/_courses/_course/_grades/courses/$course/grades': {
-      id: '/_academic/_courses/_course/_grades/courses/$course/grades'
+    '/_academic/courses/$course/grades/': {
+      id: '/_academic/courses/$course/grades/'
       path: '/courses/$course/grades'
       fullPath: '/courses/$course/grades'
-      preLoaderRoute: typeof AcademicCoursesCourseGradesCoursesCourseGradesRouteImport
+      preLoaderRoute: typeof AcademicCoursesCourseGradesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -180,14 +180,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AcademicAssignmentsAssignmentsRoute: AcademicAssignmentsAssignmentsRoute,
-  AcademicCoursesCoursesRoute: AcademicCoursesCoursesRoute,
   OtherCalendarCalendarRoute: OtherCalendarCalendarRoute,
+  AcademicAssignmentsIndexRoute: AcademicAssignmentsIndexRoute,
+  AcademicCoursesIndexRoute: AcademicCoursesIndexRoute,
+  AcademicCoursesCourseIndexRoute: AcademicCoursesCourseIndexRoute,
   OtherCalendarInboxIndexRoute: OtherCalendarInboxIndexRoute,
-  AcademicCoursesCourseCoursesCourseRoute:
-    AcademicCoursesCourseCoursesCourseRoute,
-  AcademicCoursesCourseGradesCoursesCourseGradesRoute:
-    AcademicCoursesCourseGradesCoursesCourseGradesRoute,
+  AcademicCoursesCourseGradesIndexRoute: AcademicCoursesCourseGradesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

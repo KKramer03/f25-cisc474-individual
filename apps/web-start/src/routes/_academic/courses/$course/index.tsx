@@ -11,7 +11,7 @@ import { backendFetcher } from '../../../../integrations/fetcher';
 import type { Content, Course } from '@repo/database/generated/client';
 
 export const Route = createFileRoute(
-  '/_academic/_courses/_course/courses/$course',
+  '/_academic/courses/$course/',
 )({
   component: CoursePage,
   validateSearch: (search: Record<string, unknown>): { course_id: string } => {
