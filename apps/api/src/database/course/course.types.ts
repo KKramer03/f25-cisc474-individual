@@ -26,3 +26,9 @@ export const CourseUpdateInput = z.object({
 });
 
 export type CourseUpdateInput = z.infer<typeof CourseUpdateInput>;
+
+export const CourseDeleteInput = z.object({
+  course_id: z.string(),
+});
+
+export type CourseDeleteInput = z.infer<typeof CourseDeleteInput>;

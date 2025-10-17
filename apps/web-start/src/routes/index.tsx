@@ -37,6 +37,10 @@ function RouteComponent() {
           <li>Fetch messages</li>
         </ol>
 
+        <h1>
+          CRUD Actions can be performed on Courses Page, input fields at bottom
+        </h1>
+
         <Button appName="web" className={styles.secondary}>
           Open alert
         </Button>

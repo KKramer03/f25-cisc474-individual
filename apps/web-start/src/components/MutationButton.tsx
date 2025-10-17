@@ -8,6 +8,7 @@ type MutationButtonProps<T> = {
   }) => void;
   data: T;
   method: 'POST' | 'PATCH' | 'DELETE';
+  name: string;
   className?: string;
   disabled?: boolean;
 };
@@ -16,6 +17,7 @@ export default function MutationButton<T>({
   mutation,
   data,
   method,
+  name,
   className,
   disabled,
 }: MutationButtonProps<T>) {
@@ -26,7 +28,7 @@ export default function MutationButton<T>({
       disabled={disabled}
       style={{ display: 'inline' }}
     >
-      Add Course
+      {name}
     </button>
   );
 }

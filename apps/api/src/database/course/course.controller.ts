@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { type Course } from '@repo/database/generated/client';
 import { CourseService } from './course.service';
 import {
@@ -27,9 +35,14 @@ export class CourseController {
 
   @Patch('update')
   async update(
-    @Query('id') id: string,
+    @Query('course_id') courseID: string,
     @Body() body: CourseUpdateInput,
   ): Promise<any> {
-    return await this.courseService.update(id, body);
+    return await this.courseService.update(courseID, body);
+  }
+
+  @Delete('delete')
+  async delete(@Query('course_id') courseID: string): Promise<any> {
+    return await this.courseService.delete(courseID);
   }
 }

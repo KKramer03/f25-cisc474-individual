@@ -41,10 +41,10 @@ export class CourseService {
     return newCourse;
   }
 
-  async update(id: string, body: CourseUpdateInput): Promise<any> {
+  async update(courseID: string, body: CourseUpdateInput): Promise<any> {
     const { instructor, ...rest } = body;
     const updatedCourse = await this.prisma.course.update({
-      where: { course_id: id },
+      where: { course_id: courseID },
       data: {
         ...rest,
         instructor: instructor
@@ -53,5 +53,12 @@ export class CourseService {
       },
     });
     return updatedCourse;
+  }
+
+  async delete(courseID: string): Promise<any> {
+    const deletedCourse = await this.prisma.course.delete({
+      where: { course_id: courseID },
+    });
+    return deletedCourse;
   }
 }
