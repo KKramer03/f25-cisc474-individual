@@ -118,7 +118,8 @@ button.secondary {
 }
 
 button.secondary:hover {
-  background: var(--gray-alpha-100);
+  /* background: var(--gray-alpha-100); */
+  background: rgba(255, 255, 255, 0.06);
 }
 .accordion {
   appearance: none;
