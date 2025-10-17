@@ -1,26 +1,29 @@
-import type { CourseCreateInput } from '../../../api/src/database/course/course.types';
-
-type MutationButtonProps = {
+type MutationButtonProps<T> = {
   mutation: ({
     method,
     data,
   }: {
     method: 'POST' | 'PATCH' | 'DELETE';
-    data: CourseCreateInput;
+    data: T;
   }) => void;
-  data: CourseCreateInput; // Data to be sent with the mutation
+  data: T;
+  method: 'POST' | 'PATCH' | 'DELETE';
   className?: string;
+  disabled?: boolean;
 };
 
-export default function MutationButton({
+export default function MutationButton<T>({
   mutation,
   data,
+  method,
   className,
-}: MutationButtonProps) {
+  disabled,
+}: MutationButtonProps<T>) {
   return (
     <button
       className={className}
-      onClick={() => mutation({ method: 'POST', data })}
+      onClick={() => !disabled && mutation({ method: method, data })}
+      disabled={disabled}
       style={{ display: 'inline' }}
     >
       Add Course

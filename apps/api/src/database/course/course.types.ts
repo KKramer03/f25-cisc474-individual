@@ -19,6 +19,7 @@ export const CourseCreateOutput = z.object({
 export type CourseCreateOutput = z.infer<typeof CourseCreateOutput>;
 
 export const CourseUpdateInput = z.object({
+  course_id: z.string(),
   courseName: z.string().optional(),
   description: z.string().nullable().optional(),
   instructor: z.string().optional(),
